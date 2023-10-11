@@ -1,0 +1,40 @@
+.board {
+	border-collapse: collapse;          /* 境をなしにする */
+	background-color: #fd5;             /* 背景色 */
+	/* background-image: url("wood1.jpg"); /* 木目の画像 */
+	border: 2px solid #222;
+	user-select: none;         /* テキストの範囲選択を禁止 */
+}
+
+.board td {
+	padding: 0;                /* セルの余白をゼロ */
+	width: 50px;               /* セルの幅 */
+	height: 50px;              /* セルの高さ */
+	border: 1px solid #222;    /* セルの枠の線 */
+	text-align: center;        /* 文字を左右中央にする */
+}
+
+.board td:hover {
+	background: #99c;
+	cursor: pointer;
+}
+
+.board td span {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+}
+.black, .white {
+	border-radius: 10px;
+	border: solid 2px #222;
+
+	line-height: 43px;
+	font-size: 23pt;
+	font-weight: bold;
+
+	background: #f83;
+	color: #000;
+}
+.white {
+	transform: rotate(180deg);
+}
