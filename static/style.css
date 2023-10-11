@@ -7,12 +7,13 @@
 }
 
 .board td {
-	padding: 0;                /* セルの余白をゼロ */
-	width: 50px;               /* セルの幅 */
-	height: 50px;              /* セルの高さ */
-	border: 1px solid #222;    /* セルの枠の線 */
-	text-align: center;        /* 文字を左右中央にする */
+    padding: 0;              /* セルの余白をゼロ */
+    width: 70px;             /* セルの幅を70pxに変更 */
+    height: 70px;            /* セルの高さを70pxに変更 */
+    border: 1px solid #222;  /* セルの枠の線 */
+    text-align: center;      /* 文字を左右中央にする */
 }
+
 
 .board td:hover {
 	background: #99c;

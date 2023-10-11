@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Web App</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/board">Chess Board</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Homepage</h2>
+        <p>This is the homepage of my web application.</p>
+    </main>
+    <footer>
+        <p>&copy; 2023 My Web App</p>
+    </footer>
+</body>
+</html>
