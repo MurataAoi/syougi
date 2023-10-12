@@ -7,155 +7,70 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <script>
-
-//ドラッグ＆ドロップの処理
-class DragPiece {
-	dragElement = null;
-
-	constructor(){
-	}
-
-	init(table){
-		const tdList = table.querySelectorAll("td");
-		for (const td of tdList){
-			td.addEventListener("dragstart", (event) => this.dragElement = event.target );
-			td.addEventListener("dragover", (event) => event.preventDefault() ); //デフォルトの動作を禁止
-			td.addEventListener("drop", (event) => {
-				//デフォルトの動作を禁止。
-				event.preventDefault();
-				//ドラッグ中の要素をドロップした td に移動する。
-				if (event.target.tagName == "TD"){
-					this.dragElement.parentNode.removeChild( this.dragElement);
-					event.target.appendChild( this.dragElement);
-				}
-			});
-		}
-	}
-}
-
-window.onload = function(){
-	const table = document.querySelector(".board");
-	const drag = new DragPiece();
-	drag.init(table);
-}
-
-</script>
-
-<style>
-.board {
-	border-collapse: collapse;
-	background-color: #fd5;
-	border: 2px solid #222;
-	user-select: none;
-}
-
-.board td {
-	padding: 0;
-	width: 50px;
-	height: 50px;
-	border: 1px solid #222;
-	text-align: center;
-}
-
-.board td:hover {
-	background: #99c !important;
-	cursor: pointer;
-}
-
-.board td span {
-	display: inline-block;
-	width: 40px;
-	height: 40px;
-}
-.black, .white {
-	border-radius: 10px;
-	border: solid 2px #222;
-	line-height: 43px;
-	font-size: 23pt;
-	font-weight: bold;
-	background: #f83;
-	color: #000;
-}
-.black {
-}
-.white {
-	transform: rotate(180deg);
-}
-/* 駒をドラッグ移動中の表示 */
-.black:active {
-	background: #f0f;
-}
-.white:active {
-	background: #f0f;
-	transform: rotate(180deg); /* Edge106 で反映されず */
-}
-</style><style class="darkreader darkreader--sync" media="screen"></style>
-
-<table class="board">
-<tbody>
-<tr>
-	<td><span draggable="true" class="white">香</span></td>
-	<td><span draggable="true" class="white">桂</span></td>
-	<td><span draggable="true" class="white">銀</span></td>
-	<td><span draggable="true" class="white">金</span></td>
-	<td><span draggable="true" class="white">玉</span></td>
-	<td><span draggable="true" class="white">金</span></td>
-	<td><span draggable="true" class="white">銀</span></td>
-	<td><span draggable="true" class="white">桂</span></td>
-	<td><span draggable="true" class="white">香</span></td>
-</tr>
-<tr>
-	<td></td>
-	<td><span draggable="true" class="white">飛</span></td>
-	<td></td><td></td><td></td><td></td><td></td>
-	<td><span draggable="true" class="white">角</span></td>
-	<td></td>
-</tr>
-<tr>
-	<td><span draggable="true" class="white">歩</span></td>
-	<td><span draggable="true" class="white">歩</span></td>
-	<td><span draggable="true" class="white">歩</span></td>
-	<td><span draggable="true" class="white">歩</span></td>
-	<td><span draggable="true" class="white">歩</span></td>
-	<td><span draggable="true" class="white">歩</span></td>
-	<td><span draggable="true" class="white">歩</span></td>
-	<td><span draggable="true" class="white">歩</span></td>
-	<td><span draggable="true" class="white">歩</span></td>
-</tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr>
-	<td><span draggable="true" class="black">歩</span></td>
-	<td><span draggable="true" class="black">歩</span></td>
-	<td><span draggable="true" class="black">歩</span></td>
-	<td><span draggable="true" class="black">歩</span></td>
-	<td><span draggable="true" class="black">歩</span></td>
-	<td><span draggable="true" class="black">歩</span></td>
-	<td><span draggable="true" class="black">歩</span></td>
-	<td><span draggable="true" class="black">歩</span></td>
-	<td><span draggable="true" class="black">歩</span></td>
-</tr>
-<tr>
-	<td></td>
-	<td><span draggable="true" class="black">角</span></td>
-	<td></td><td></td><td></td><td></td><td></td>
-	<td><span draggable="true" class="black">飛</span></td>
-	<td></td>
-</tr>
-<tr>
-	<td><span draggable="true" class="black">香</span></td>
-	<td><span draggable="true" class="black">桂</span></td>
-	<td><span draggable="true" class="black">銀</span></td>
-	<td><span draggable="true" class="black">金</span></td>
-	<td><span draggable="true" class="black">玉</span></td>
-	<td><span draggable="true" class="black">金</span></td>
-	<td><span draggable="true" class="black">銀</span></td>
-	<td><span draggable="true" class="black">桂</span></td>
-	<td><span draggable="true" class="black">香</span></td>
-</tr>
-</tbody>
-</table>
+    <table class="board">
+        <tbody>
+            <tr>
+                <td><span draggable="true" class="white">香</span></td>
+                <td><span draggable="true" class="white">桂</span></td>
+                <td><span draggable="true" class="white">銀</span></td>
+                <td><span draggable="true" class="white">金</span></td>
+                <td><span draggable="true" class="white">玉</span></td>
+                <td><span draggable="true" class="white">金</span></td>
+                <td><span draggable="true" class="white">銀</span></td>
+                <td><span draggable="true" class="white">桂</span></td>
+                <td><span draggable="true" class="white">香</span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span draggable="true" class="white">飛</span></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span draggable="true" class="white">角</span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><span draggable="true" class="white">歩</span></td>
+                <td><span draggable="true" class="white">歩</span></td>
+                <td><span draggable="true" class="white">歩</span></td>
+                <td><span draggable="true" class="white">歩</span></td>
+                <td><span draggable="true" class="white">歩</span></td>
+                <td><span draggable="true" class="white">歩</span></td>
+                <td><span draggable="true" class="white">歩</span></td>
+                <td><span draggable="true" class="white">歩</span></td>
+                <td><span draggable="true" class="white">歩</span></td>
+            </tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr>
+                <td><span draggable="true" class="black">歩</span></td>
+                <td><span draggable="true" class="black">歩</span></td>
+                <td><span draggable="true" class="black">歩</span></td>
+                <td><span draggable="true" class="black">歩</span></td>
+                <td><span draggable="true" class="black">歩</span></td>
+                <td><span draggable="true" class="black">歩</span></td>
+                <td><span draggable="true" class="black">歩</span></td>
+                <td><span draggable="true" class="black">歩</span></td>
+                <td><span draggable="true" class="black">歩</span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span draggable="true" class="black">角</span></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><span draggable="true" class="black">飛</span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><span draggable="true" class="black">香</span></td>
+                <td><span draggable="true" class="black">桂</span></td>
+                <td><span draggable="true" class="black">銀</span></td>
+                <td><span draggable="true" class="black">金</span></td>
+                <td><span draggable="true" class="black">玉</span></td>
+                <td><span draggable="true" class="black">金</span></td>
+                <td><span draggable="true" class="black">銀</span></td>
+                <td><span draggable="true" class="black">桂</span></td>
+                <td><span draggable="true" class="black">香</span></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

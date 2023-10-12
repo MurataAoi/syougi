@@ -1,0 +1,47 @@
+.board {
+	border-collapse: collapse;
+	background-color: #fd5;
+	border: 2px solid #222;
+	user-select: none;
+}
+
+.board td {
+	padding: 0;
+	width: 50px;
+	height: 50px;
+	border: 1px solid #222;
+	text-align: center;
+}
+
+.board td:hover {
+	background: #99c !important;
+	cursor: pointer;
+}
+
+.board td span {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+}
+.black, .white {
+	border-radius: 10px;
+	border: solid 2px #222;
+	line-height: 43px;
+	font-size: 23pt;
+	font-weight: bold;
+	background: #f83;
+	color: #000;
+}
+.black {
+}
+.white {
+	transform: rotate(180deg);
+}
+/* 駒をドラッグ移動中の表示 */
+.black:active {
+	background: #f0f;
+}
+.white:active {
+	background: #f0f;
+	transform: rotate(180deg); /* Edge106 で反映されず */
+}
