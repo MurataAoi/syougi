@@ -45,3 +45,5 @@ legal_moves = fu.legal_moves(board)
 # 合法な動きを表示します。
 for move in legal_moves:
     print(f"歩 can move to {move}")
+
+def __init__(self, name, position):

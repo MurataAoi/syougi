@@ -3,75 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>将棋</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}} ">
 </head>
 <body>
-    <table class="board">
-        <tbody>
-            <tr>
-                <td><span draggable="true" class="white">香</span></td>
-                <td><span draggable="true" class="white">桂</span></td>
-                <td><span draggable="true" class="white">銀</span></td>
-                <td><span draggable="true" class="white">金</span></td>
-                <td><span draggable="true" class="white">玉</span></td>
-                <td><span draggable="true" class="white">金</span></td>
-                <td><span draggable="true" class="white">銀</span></td>
-                <td><span draggable="true" class="white">桂</span></td>
-                <td><span draggable="true" class="white">香</span></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><span draggable="true" class="white">飛</span></td>
-                <td></td><td></td><td></td><td></td><td></td>
-                <td><span draggable="true" class="white">角</span></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><span draggable="true" class="white">歩</span></td>
-                <td><span draggable="true" class="white">歩</span></td>
-                <td><span draggable="true" class="white">歩</span></td>
-                <td><span draggable="true" class="white">歩</span></td>
-                <td><span draggable="true" class="white">歩</span></td>
-                <td><span draggable="true" class="white">歩</span></td>
-                <td><span draggable="true" class="white">歩</span></td>
-                <td><span draggable="true" class="white">歩</span></td>
-                <td><span draggable="true" class="white">歩</span></td>
-            </tr>
-            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr>
-                <td><span draggable="true" class="black">歩</span></td>
-                <td><span draggable="true" class="black">歩</span></td>
-                <td><span draggable="true" class="black">歩</span></td>
-                <td><span draggable="true" class="black">歩</span></td>
-                <td><span draggable="true" class="black">歩</span></td>
-                <td><span draggable="true" class="black">歩</span></td>
-                <td><span draggable="true" class="black">歩</span></td>
-                <td><span draggable="true" class="black">歩</span></td>
-                <td><span draggable="true" class="black">歩</span></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><span draggable="true" class="black">角</span></td>
-                <td></td><td></td><td></td><td></td><td></td>
-                <td><span draggable="true" class="black">飛</span></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><span draggable="true" class="black">香</span></td>
-                <td><span draggable="true" class="black">桂</span></td>
-                <td><span draggable="true" class="black">銀</span></td>
-                <td><span draggable="true" class="black">金</span></td>
-                <td><span draggable="true" class="black">玉</span></td>
-                <td><span draggable="true" class="black">金</span></td>
-                <td><span draggable="true" class="black">銀</span></td>
-                <td><span draggable="true" class="black">桂</span></td>
-                <td><span draggable="true" class="black">香</span></td>
-            </tr>
-        </tbody>
-    </table>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {{banmen | safe}}
+    <button class="button">更新</button>
 </body>
 </html>
