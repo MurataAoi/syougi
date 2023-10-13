@@ -8,6 +8,11 @@ app = Flask(__name__)
 
 board = shogi.Board()
 # board.push_usi("3g3f")
+# board.push_usi("3c3d")
+# board.push_usi("2h3h")
+# board.push_usi("2b5e")
+# board.push_usi("3i2h")
+
 
 sfen = board.sfen()
 
@@ -31,3 +36,5 @@ def board_func():
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8000, debug=True)
+
+

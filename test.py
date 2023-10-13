@@ -1,33 +1,24 @@
 import unittest
+import requests
+import shogi
 
-def alphabet2number(alphabet):
-    if alphabet == "a":
-        return 1
-    elif alphabet == "b":
-        return 2
-    elif alphabet == "c":
-        return 3
-    elif alphabet == "d":
-        return 4
-    elif alphabet == "e":
-        return 5
-    elif alphabet == "f":
-        return 6
-    elif alphabet == "g":
-        return 7
-    elif alphabet == "h":
-        return 8
-    elif alphabet == "i":
-        return 9
+board = shogi.Board()
+# board.push_usi("7g7f")
+# board.push_usi("2g2f")
+sfen = board.sfen()
+print("スタート")
+def gikou(sfen):
+    r = requests.get(
+        url=f'https://17xn1ovxga.execute-api.ap-northeast-1.amazonaws.com/production/gikou?byoyomi=10000&position=sfen {sfen}')
+    data = r.json()
+    gikou_result = data['bestmove']
+    return gikou_result
 
 
-
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        expected = 9
-        actual = alphabet2number("i")
-        self.assertEqual(expected, actual)
-
-
-if __name__ == '__main__':
-    unittest.main()
+for i in range(100):
+    prompt = f"{i + 1}手目："
+    my_move = input(prompt)
+    board.push_usi(my_move)
+    gikou_move = gikou(board.sfen())
+    print(gikou_move)
+    board.push_usi(gikou_move)
