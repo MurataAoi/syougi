@@ -1,14 +1,15 @@
 import re
 
+
 def insert_asterisks(input_string):
     # 正規表現を使用して数字を検出
-    digits = re.findall(r'\d', input_string)
-    
+    digits = re.findall(r"\d", input_string)
+
     result_string = input_string
     # 数字の数だけ '*' を挿入
     for digit in digits:
-        result_string = result_string.replace(digit, '*' * int(digit), 1)
-    
+        result_string = result_string.replace(digit, "*" * int(digit), 1)
+
     return result_string
 
 
@@ -43,7 +44,7 @@ def sfen2HTML(sfen):
                 piece_char = "歩"
             else:
                 piece_char = ""
-            
+
             if piece.islower():
                 turn = "white"
             else:
