@@ -21,7 +21,7 @@ def sfen2HTML(sfen):
     table = ""
     banmen = insert_asterisks(sfen.split(" ")[0])
 
-    suji = 1
+    suji = 9
     dan_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
     dan = 0
     for row in banmen.split("/"):
@@ -54,8 +54,8 @@ def sfen2HTML(sfen):
                 turn = "black"
 
             td += f"<td id='{suji}{dan_list[dan]}' onclick='SendIdAsPosition(this.id)'><span class='{turn}'>{piece_char}</span></td>"  # ここ？
-            suji += 1
-        suji = 1
+            suji -= 1
+        suji = 9
         tr = f"<tr>{td}</tr>"
         table += tr
         dan += 1
