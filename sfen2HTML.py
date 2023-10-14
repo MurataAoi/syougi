@@ -59,8 +59,11 @@ def sfen2HTML(sfen):
         tr = f"<tr>{td}</tr>"
         table += tr
         dan += 1
-    table = f"<table class='board'><tbody>{table}</tbody></table>"
+    table = f"<table id='board' class='board'><tbody>{table}</tbody></table>"
+
+    print(sfen.split(" "))
+
     return table
 
 if __name__ == "__main__":
-    print(sfen2HTML("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1"))
+    sfen2HTML("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")

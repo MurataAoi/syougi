@@ -50,9 +50,6 @@ class ShogiPiece:
                 if x < 8 and board[y + 1][x + 1] is None:
                     moves.append((x + 1, y + 1))
 
-
-
-
         elif self.name == "金":
             # 金将は前進3つ、横2つ、および真後ろ1つの動きがあります。
             # 前進
@@ -72,7 +69,6 @@ class ShogiPiece:
                 moves.append((x - 1, y))
             if x < 8 and board[y][x + 1] is None:
                 moves.append((x + 1, y))
-
 
         elif self.name == "飛":
             # 飛車は直線的な動きができます。

@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}} ">
 </head>
 <body>
+    <div class="Piece_storage_area">後手の駒置き場</div>
     {{banmen | safe}}
+    <div class="Piece_storage_area">先手の駒置き場</div>
     <div id="clicked" style="border: 1px solid black; width: 500px; height: 100px;"></div>
-​
+
     <script>
     function SendIdAsPosition(tdId) {
         var clicked_masu = tdId;
@@ -20,7 +22,7 @@
         }).done(function(received_data) {           // 戻ってきたのはJSON（文字列）
             var dict = JSON.parse(received_data);   // JSONを連想配列にする
             var answer = dict["answer"];
-            $("#clicked").html(answer);              // html要素を書き換える
+            $("#board").html(answer);              // html要素を書き換える
         }).fail(function() {
             console.log("失敗");
         });

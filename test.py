@@ -1,10 +1,8 @@
-import unittest
+
 import requests
 import shogi
 
 board = shogi.Board()
-# board.push_usi("7g7f")
-# board.push_usi("2g2f")
 sfen = board.sfen()
 print("スタート")
 def gikou(sfen):

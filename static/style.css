@@ -43,3 +43,7 @@
 	background: #f0f;
 	transform: rotate(180deg); /* Edge106 で反映されず */
 }
+.Piece_storage_area {
+    background-color: rgb(255, 255, 0);
+}
+

@@ -1,44 +1,48 @@
 import json
 from flask import Flask, render_template, request
 from sfen2HTML import sfen2HTML
-from move import ShogiPiece
+from gikou import gikou_return
 
 # from finish import
 import shogi
-import re
 
-selected = False
+
+class Board:
+    """"""
+
+    def __init__(self):
+        self.board = shogi.Board()
+        self.sfen = self.board.sfen()
+
+    def cyakusyu(self, usi):
+        self.board.push_usi(usi)
+        self.sfen = self.board.sfen()
+        return sfen
+
+
+game = Board()
+
+pieceWasSelected = False
 before_move = ""
-
 
 app = Flask(__name__)
 
-sfen = shogi.Board().sfen()
-
-
-
+board = ""
+sfen = ""
 
 
 @app.route("/")
 def board_func():
-    # move_piece = ShogiPiece("歩", (3, 3))  # ShogiPiece クラスのインスタンスを作成
-    # board = [[None for _ in range(9)] for _ in range(9)]  # サンプルの将棋盤
-    # legal_moves = move_piece.legal_moves(board)  # 歩の動きを取得
-    # print(legal_moves)
-
-    banmen = sfen2HTML(sfen)
-    global selected
-    global before_move
-    selected = False
-    before_move = ""
+    banmen = sfen2HTML(game.sfen)
 
     return render_template("board.html", banmen=banmen)
 
 
 @app.route("/call_from_ajax", methods=["POST"])
 def callfromajax():
-    global selected
+    global pieceWasSelected
     global before_move
+
     dict = {}
     if request.method == "POST":
         try:
@@ -46,19 +50,32 @@ def callfromajax():
         except Exception as e:
             masu = str(e)
 
-        if selected == False:
+        if not pieceWasSelected:
             before_move = masu
-            selected= True
-        elif selected == True:
-            # print(選択した駒をどこに動かしますか？)
-            selected = False
-            print(before_move + masu)
+            pieceWasSelected = True
+            print("piece selected")
+            dict = {"answer": ""}
+            return json.dumps(dict)
+
+        elif pieceWasSelected is True:
+            after_move = masu
+            pieceWasSelected = False
+            game.cyakusyu(before_move + after_move)
             before_move = ""
-            
+            dict = {"answer": sfen2HTML(game.sfen)}
+            return json.dumps(dict)
 
 
-        dict = {"answer": masu}
-    return json.dumps(dict)
+@app.route("/gikou", methods=["POST"])
+def gikou():
+    if request.method == "POST":
+        print("技巧に与えているsfen" + game.sfen)
+        gikoumove = gikou_return(game.sfen)
+        print(gikoumove)
+        game.cyakusyu(gikoumove)
+        print("技巧着手後sfen" + game.sfen)
+        dict = {"gikoureturn": sfen2HTML(game.sfen)}
+        return json.dumps(dict)
 
 
 if __name__ == "__main__":
