@@ -6,26 +6,88 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}} ">
+    <style>
+        .flash-message {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 10px;
+            text-align: center;
+            display: none;
+        }
+        
+    </style>
 </head>
 <body>
-    <div class="Piece_storage_area">後手の駒置き場</div>
-    {{banmen | safe}}
-    <div class="Piece_storage_area">先手の駒置き場</div>
+    <div class="flash-message" id="flashMessage">
+        This is a flash message.
+        <button onclick="hideFlashMessage()">Close</button>
+    </div>
+    <div class="fit">
+        <div class="komadai-w">{{mochigoma_w| safe}} <img class="opponent" src="https://2.bp.blogspot.com/-ZwYKR5Zu28s/U6Qo2qAjsqI/AAAAAAAAhkM/HkbDZEJwvPs/s800/omocha_robot.png" alt=""></div>
+            <div>{{syogiban | safe}}</div>
+        <div class="komadai-b">{{mochigoma_b| safe}}<img class="playser" src="https://3.bp.blogspot.com/-8L0QlGW0GL4/UnyFtLUmfBI/AAAAAAAAaSo/FoJIaQ-4wLI/s800/animal_panda.png" alt=""></div>
+    </div>
     <div id="clicked" style="border: 1px solid black; width: 500px; height: 100px;"></div>
 
     <script>
+    function showFlashMessage() {
+        document.getElementById("flashMessage").style.display = "block";
+    }
+    
+    function hideFlashMessage(){
+        document.getElementById("flashMessage").style.display = "none";
+    }
     function SendIdAsPosition(tdId) {
+
         var clicked_masu = tdId;
+        console.log(tdId);
         $.ajax("/call_from_ajax", {
             type: "post",
-            data: {"masu": clicked_masu},              // 連想配列をPOSTする
-        }).done(function(received_data) {           // 戻ってきたのはJSON（文字列）
-            var dict = JSON.parse(received_data);   // JSONを連想配列にする
-            var answer = dict["answer"];
-            $("#board").html(answer);              // html要素を書き換える
+            data: {"masu": clicked_masu,},             
+        }).done(function(received_data) {           
+            var dict = JSON.parse(received_data);
+            var banmen = dict["banmen"];
+            var mochigoma_w = dict["mochigoma_w"];
+            var mochigoma_b = dict["mochigoma_b"];
+            
+
+            if (dict["banmen"] !== "" ) {
+                var message = dict["message"]
+                if (dict["promotable"] == "promotable"){
+                    showFlashMessage();
+                }else{
+                    $("#banmen").html(banmen);
+                    $("#mochigoma_w").html(mochigoma_w);
+                    $("#mochigoma_b").html(mochigoma_b);
+                    $("#clicked").html(message)
+
+                    $.ajax("/gikou", {
+                        type:"post"
+                    }).done(function(recieved_html){
+                        var dict_gikou = JSON.parse(recieved_html);
+                        var banmen = dict_gikou["banmen"];
+                        var mochigoma_w = dict_gikou["mochigoma_w"];
+                        var mochigoma_b = dict_gikou["mochigoma_b"];
+                        var message = dict_gikou["message"]
+                        $("#banmen").html(banmen);
+                        $("#mochigoma_w").html(mochigoma_w);
+                        $("#mochigoma_b").html(mochigoma_b);
+                        $("#clicked").html(message)
+                        let mojiireru = Document.getElementById("clicked");
+                        mojiireru.textContent = "aaaa";
+                    }).fail(function() {
+                        console.log("失敗");
+                    });
+                }
+            }else {
+                document.getElementById(tdId).style.backgroundColor="lightblue"
+            }
+            
         }).fail(function() {
             console.log("失敗");
         });
+
+
     }
     </script>
 </body>
